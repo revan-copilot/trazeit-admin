@@ -1,0 +1,304 @@
+{
+    "qr_scans": [
+        {
+            "id": "1",
+            "productName": "Green Beans",
+            "qrCode": "QR006",
+            "batch": "BT-2024-006",
+            "scans": 220,
+            "grades": [
+                {
+                    "text": "Freshly Harvested",
+                    "type": "green"
+                },
+                {
+                    "text": "Local Sourcing",
+                    "type": "blue"
+                },
+                {
+                    "text": "Grade A Quality",
+                    "type": "orange"
+                }
+            ],
+            "location": {
+                "company": "Farm to Table Co.",
+                "address": "Washington, USA"
+            }
+        },
+        {
+            "id": "2",
+            "productName": "Butternut Squash",
+            "qrCode": "QR005",
+            "batch": "BT-2024-005",
+            "scans": 180,
+            "grades": [
+                {
+                    "text": "Organic Certified",
+                    "type": "green"
+                },
+                {
+                    "text": "Traceable Supply Chain",
+                    "type": "blue"
+                },
+                {
+                    "text": "Grade A Quality",
+                    "type": "orange"
+                }
+            ],
+            "location": {
+                "company": "Harvest Time Farms",
+                "address": "Oregon, USA"
+            }
+        },
+        {
+            "id": "3",
+            "productName": "Heirloom Carrots",
+            "qrCode": "QR002",
+            "batch": "BT-2024-002",
+            "scans": 150,
+            "grades": [
+                {
+                    "text": "Non-GMO",
+                    "type": "green"
+                },
+                {
+                    "text": "Farm Fresh",
+                    "type": "blue"
+                },
+                {
+                    "text": "Grade A Quality",
+                    "type": "orange"
+                }
+            ],
+            "location": {
+                "company": "Root Veggie Farms",
+                "address": "California, USA"
+            }
+        },
+        {
+            "id": "4",
+            "productName": "Radishes",
+            "qrCode": "QR007",
+            "batch": "BT-2024-007",
+            "scans": 100,
+            "grades": [
+                {
+                    "text": "Organic Grown",
+                    "type": "green"
+                },
+                {
+                    "text": "Environmentally Friendly",
+                    "type": "blue"
+                },
+                {
+                    "text": "Grade A Quality",
+                    "type": "orange"
+                }
+            ],
+            "location": {
+                "company": "Rooted Farms",
+                "address": "Illinois, USA"
+            }
+        },
+        {
+            "id": "5",
+            "productName": "Sweet Bell Peppers",
+            "qrCode": "QR003",
+            "batch": "BT-2024-003",
+            "scans": 300,
+            "grades": [
+                {
+                    "text": "Pesticide-Free",
+                    "type": "green"
+                },
+                {
+                    "text": "Eco-Friendly Practices",
+                    "type": "blue"
+                },
+                {
+                    "text": "Grade A Quality",
+                    "type": "orange"
+                }
+            ],
+            "location": {
+                "company": "Sunny Fields Produce",
+                "address": "Florida, USA"
+            }
+        },
+        {
+            "id": "6",
+            "productName": "Zucchini",
+            "qrCode": "QR008",
+            "batch": "BT-2024-008",
+            "scans": 350,
+            "grades": [
+                {
+                    "text": "Certified Organic",
+                    "type": "green"
+                },
+                {
+                    "text": "Locally Sourcing",
+                    "type": "blue"
+                },
+                {
+                    "text": "Grade A Quality",
+                    "type": "orange"
+                }
+            ],
+            "location": {
+                "company": "Bountiful Harvesters",
+                "address": "New York, USA"
+            }
+        },
+        {
+            "id": "7",
+            "productName": "Organic Tomatoes",
+            "qrCode": "QR001",
+            "batch": "BT-2024-001",
+            "scans": 264,
+            "grades": [
+                {
+                    "text": "USDA Organic Certified",
+                    "type": "green"
+                },
+                {
+                    "text": "Blockchain Verified",
+                    "type": "blue"
+                },
+                {
+                    "text": "Grade A Quality",
+                    "type": "orange"
+                }
+            ],
+            "location": {
+                "company": "Leafy Greens Co.",
+                "address": "Arizona, USA"
+            }
+        },
+        {
+            "id": "8",
+            "productName": "Spinach",
+            "qrCode": "QR009",
+            "batch": "BT-2024-009",
+            "scans": 400,
+            "grades": [
+                {
+                    "text": "USDA Certified Organic",
+                    "type": "green"
+                },
+                {
+                    "text": "Chemical-Free Farming",
+                    "type": "blue"
+                },
+                {
+                    "text": "Grade A Quality",
+                    "type": "orange"
+                }
+            ],
+            "location": {
+                "company": "Vital Greens Co.",
+                "address": "Colorado, USA"
+            }
+        },
+        {
+            "id": "9",
+            "productName": "Crisp Cucumbers",
+            "qrCode": "QR004",
+            "batch": "BT-2024-004",
+            "scans": 200,
+            "grades": [
+                {
+                    "text": "Naturally Grown",
+                    "type": "green"
+                },
+                {
+                    "text": "Sustainably Sourced",
+                    "type": "blue"
+                },
+                {
+                    "text": "Grade A Quality",
+                    "type": "orange"
+                }
+            ],
+            "location": {
+                "company": "Green Thumb Growers",
+                "address": "Texas, USA"
+            }
+        },
+        {
+            "id": "10",
+            "productName": "Kale",
+            "qrCode": "QR010",
+            "batch": "BT-2024-010",
+            "scans": 350,
+            "grades": [
+                {
+                    "text": "Organic Certified",
+                    "type": "green"
+                },
+                {
+                    "text": "Cultivated with Care",
+                    "type": "blue"
+                },
+                {
+                    "text": "Grade A Quality",
+                    "type": "orange"
+                }
+            ],
+            "location": {
+                "company": "Green Leaf Farms",
+                "address": "Wisconsin, USA"
+            }
+        },
+        {
+            "id": "11",
+            "productName": "Eggplant",
+            "qrCode": "QR011",
+            "batch": "BT-2024-011",
+            "scans": 250,
+            "grades": [
+                {
+                    "text": "Non-GMO",
+                    "type": "green"
+                },
+                {
+                    "text": "Sustainably Grown",
+                    "type": "blue"
+                },
+                {
+                    "text": "Grade A Quality",
+                    "type": "orange"
+                }
+            ],
+            "location": {
+                "company": "Mediterranean Harvest Co.",
+                "address": "New Jersey, USA"
+            }
+        },
+        {
+            "id": "12",
+            "productName": "Pumpkins",
+            "qrCode": "QR012",
+            "batch": "BT-2024-012",
+            "scans": 220,
+            "grades": [
+                {
+                    "text": "Organic Practices",
+                    "type": "green"
+                },
+                {
+                    "text": "Farm to Fork",
+                    "type": "blue"
+                },
+                {
+                    "text": "Grade A Quality",
+                    "type": "orange"
+                }
+            ],
+            "location": {
+                "company": "Crisp Autumn Farms",
+                "address": "Michigan, USA"
+            }
+        }
+    ]
+}

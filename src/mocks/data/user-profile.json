@@ -1,0 +1,10 @@
+{
+    "id": "user-1",
+    "firstName": "Olivia",
+    "lastName": "Rhye",
+    "email": "olivia@sample.com",
+    "phone": "899979(797)",
+    "countryCode": "US",
+    "avatar": "/assets/Avatar.png",
+    "coverImage": null
+}

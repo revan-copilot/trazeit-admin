@@ -1,0 +1,312 @@
+{
+    "products": [
+        {
+            "id": "1",
+            "name": "Tea Leaf",
+            "image": "/assets/products/tea-leaf.png",
+            "steps": [
+                {
+                    "name": "Harvesting",
+                    "quantity": "8 Q"
+                },
+                {
+                    "name": "Receive",
+                    "quantity": "14 Q"
+                },
+                {
+                    "name": "Dehydration",
+                    "quantity": "10 Q"
+                }
+            ],
+            "totalSteps": 7,
+            "type": "Herbal Infusions",
+            "status": "ACTIVE"
+        },
+        {
+            "id": "2",
+            "name": "Potato",
+            "image": "/assets/products/potato.png",
+            "steps": [
+                {
+                    "name": "Harvesting",
+                    "quantity": "8 Q"
+                },
+                {
+                    "name": "Receive",
+                    "quantity": "14 Q"
+                },
+                {
+                    "name": "Dehydration",
+                    "quantity": "10 Q"
+                }
+            ],
+            "totalSteps": 7,
+            "type": "Vegetable",
+            "status": "ACTIVE"
+        },
+        {
+            "id": "3",
+            "name": "Orange Juice",
+            "image": "/assets/products/orange-juice.png",
+            "steps": [
+                {
+                    "name": "Harvesting",
+                    "quantity": "8 Q"
+                },
+                {
+                    "name": "Receive",
+                    "quantity": "14 Q"
+                },
+                {
+                    "name": "Dehydration",
+                    "quantity": "10 Q"
+                }
+            ],
+            "totalSteps": 7,
+            "type": "Fruit Beverages",
+            "status": "ACTIVE"
+        },
+        {
+            "id": "4",
+            "name": "Potato",
+            "image": "/assets/products/potato.png",
+            "steps": [
+                {
+                    "name": "Harvesting",
+                    "quantity": "8 Q"
+                },
+                {
+                    "name": "Receive",
+                    "quantity": "14 Q"
+                },
+                {
+                    "name": "Dehydration",
+                    "quantity": "10 Q"
+                }
+            ],
+            "totalSteps": 7,
+            "type": "Vegetable",
+            "status": "ACTIVE"
+        },
+        {
+            "id": "5",
+            "name": "Pineapple Juice",
+            "image": "/assets/products/pineapple-juice.png",
+            "steps": [
+                {
+                    "name": "Harvesting",
+                    "quantity": "8 Q"
+                },
+                {
+                    "name": "Receive",
+                    "quantity": "14 Q"
+                },
+                {
+                    "name": "Dehydration",
+                    "quantity": "10 Q"
+                }
+            ],
+            "totalSteps": 7,
+            "type": "Fruit Beverages",
+            "status": "ACTIVE"
+        },
+        {
+            "id": "6",
+            "name": "Orange Juice",
+            "image": "/assets/products/orange-juice.png",
+            "steps": [
+                {
+                    "name": "Harvesting",
+                    "quantity": "8 Q"
+                },
+                {
+                    "name": "Receive",
+                    "quantity": "14 Q"
+                },
+                {
+                    "name": "Dehydration",
+                    "quantity": "10 Q"
+                }
+            ],
+            "totalSteps": 7,
+            "type": "Fruit Beverages",
+            "status": "ACTIVE"
+        },
+        {
+            "id": "7",
+            "name": "Pineapple Juice",
+            "image": "/assets/products/pineapple-juice.png",
+            "steps": [
+                {
+                    "name": "Harvesting",
+                    "quantity": "8 Q"
+                },
+                {
+                    "name": "Receive",
+                    "quantity": "14 Q"
+                },
+                {
+                    "name": "Dehydration",
+                    "quantity": "10 Q"
+                }
+            ],
+            "totalSteps": 7,
+            "type": "Fruit Beverages",
+            "status": "ACTIVE"
+        },
+        {
+            "id": "8",
+            "name": "Mango",
+            "image": "/assets/products/mango.png",
+            "steps": [
+                {
+                    "name": "Harvesting",
+                    "quantity": "8 Q"
+                },
+                {
+                    "name": "Receive",
+                    "quantity": "14 Q"
+                },
+                {
+                    "name": "Dehydration",
+                    "quantity": "10 Q"
+                }
+            ],
+            "totalSteps": 7,
+            "type": "Fruit",
+            "status": "ACTIVE"
+        },
+        {
+            "id": "9",
+            "name": "Pineapple Juice",
+            "image": "/assets/products/pineapple-juice.png",
+            "steps": [
+                {
+                    "name": "Harvesting",
+                    "quantity": "8 Q"
+                },
+                {
+                    "name": "Receive",
+                    "quantity": "14 Q"
+                },
+                {
+                    "name": "Dehydration",
+                    "quantity": "10 Q"
+                }
+            ],
+            "totalSteps": 7,
+            "type": "Fruit Beverages",
+            "status": "ACTIVE"
+        },
+        {
+            "id": "10",
+            "name": "Mango",
+            "image": "/assets/products/mango.png",
+            "steps": [
+                {
+                    "name": "Harvesting",
+                    "quantity": "8 Q"
+                },
+                {
+                    "name": "Receive",
+                    "quantity": "14 Q"
+                },
+                {
+                    "name": "Dehydration",
+                    "quantity": "10 Q"
+                }
+            ],
+            "totalSteps": 7,
+            "type": "Fruit",
+            "status": "ACTIVE"
+        },
+        {
+            "id": "11",
+            "name": "Orange Juice",
+            "image": "/assets/products/orange-juice.png",
+            "steps": [
+                {
+                    "name": "Harvesting",
+                    "quantity": "8 Q"
+                },
+                {
+                    "name": "Receive",
+                    "quantity": "14 Q"
+                },
+                {
+                    "name": "Dehydration",
+                    "quantity": "10 Q"
+                }
+            ],
+            "totalSteps": 7,
+            "type": "Fruit Beverages",
+            "status": "ACTIVE"
+        },
+        {
+            "id": "12",
+            "name": "Orange Juice",
+            "image": "/assets/products/orange-juice.png",
+            "steps": [
+                {
+                    "name": "Harvesting",
+                    "quantity": "8 Q"
+                },
+                {
+                    "name": "Receive",
+                    "quantity": "14 Q"
+                },
+                {
+                    "name": "Dehydration",
+                    "quantity": "10 Q"
+                }
+            ],
+            "totalSteps": 7,
+            "type": "Fruit Beverages",
+            "status": "ACTIVE"
+        },
+        {
+            "id": "13",
+            "name": "Mango",
+            "image": "/assets/products/mango.png",
+            "steps": [
+                {
+                    "name": "Harvesting",
+                    "quantity": "8 Q"
+                },
+                {
+                    "name": "Receive",
+                    "quantity": "14 Q"
+                },
+                {
+                    "name": "Dehydration",
+                    "quantity": "10 Q"
+                }
+            ],
+            "totalSteps": 7,
+            "type": "Fruit",
+            "status": "ACTIVE"
+        },
+        {
+            "id": "14",
+            "name": "Mango",
+            "image": "/assets/products/mango.png",
+            "steps": [
+                {
+                    "name": "Harvesting",
+                    "quantity": "8 Q"
+                },
+                {
+                    "name": "Receive",
+                    "quantity": "14 Q"
+                },
+                {
+                    "name": "Dehydration",
+                    "quantity": "10 Q"
+                }
+            ],
+            "totalSteps": 7,
+            "type": "Fruit",
+            "status": "ACTIVE"
+        }
+    ]
+}

@@ -1,0 +1,80 @@
+{
+    "users": [
+        {
+            "id": "1",
+            "name": "Rose Joyce",
+            "phone": "(+91) 9876543210",
+            "email": "rose.joyce@example.com",
+            "location": "Adyar, Chennai",
+            "status": "active",
+            "avatar": "https://i.pravatar.cc/150?u=rose",
+            "role": "admin"
+        },
+        {
+            "id": "2",
+            "name": "Fatima Al-Farsi",
+            "phone": "(+968) 24 123456",
+            "email": "fatima.alfarsi@example.com",
+            "location": "Muscat, Oman",
+            "status": "active",
+            "avatar": "https://i.pravatar.cc/150?u=fatima",
+            "role": "admin"
+        },
+        {
+            "id": "3",
+            "name": "Aisha Khan",
+            "phone": "(+92) 300 1234567",
+            "email": "aisha.khan@example.com",
+            "location": "Karachi, Pakistan",
+            "status": "active",
+            "avatar": "https://i.pravatar.cc/150?u=aisha",
+            "role": "admin"
+        },
+        {
+            "id": "4",
+            "name": "Chloe Dubois",
+            "phone": "(+33) 1 23 45 67 89",
+            "email": "chloe.dubois@example.com",
+            "location": "Montmartre, Paris",
+            "status": "active",
+            "avatar": "https://i.pravatar.cc/150?u=chloe",
+            "role": "user"
+        },
+        {
+            "id": "5",
+            "name": "Oliver Johnson",
+            "phone": "(+61) 2 1234 5678",
+            "email": "oliver.johnson@example.com",
+            "location": "Sydney, Australia",
+            "status": "active",
+            "avatar": "https://i.pravatar.cc/150?u=oliver",
+            "role": "user"
+        },
+        {
+            "id": "6",
+            "name": "Liam O'Brien",
+            "phone": "(+353) 1 234 5678",
+            "email": "liam.obrien@example.com",
+            "location": "Temple Bar, Dublin",
+            "status": "active",
+            "avatar": "https://i.pravatar.cc/150?u=liam",
+            "role": "user"
+        },
+        {
+            "id": "11",
+            "name": "Carlos Fernandez",
+            "phone": "(+34) 912 345 678",
+            "email": "carlos.fernandez@example.com",
+            "location": "La Latina, Madrid",
+            "status": "active",
+            "avatar": "https://i.pravatar.cc/150?u=carlos",
+            "role": "admin"
+        }
+    ],
+    "pagination": {
+        "total": 7,
+        "perPage": 10,
+        "currentPage": 1,
+        "totalPages": 1
+    }
+}

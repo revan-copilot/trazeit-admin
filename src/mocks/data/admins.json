@@ -1,0 +1,136 @@
+{
+    "admins": [
+        {
+            "id": "1",
+            "companyName": "Procter & Gamble",
+            "companyLogo": "pg",
+            "phone": "(303) 555-0105",
+            "email": "support@example.com",
+            "location": "789 Oak Avenue, Willow Creek, Glenwood, Redwood County, CA 91234",
+            "contactPerson": {
+                "name": "Zoya Kapoor",
+                "phone": "(671) 555-0110",
+                "avatar": "/assets/Avatar.png"
+            },
+            "status": "active"
+        },
+        {
+            "id": "2",
+            "companyName": "Procter & Gamble",
+            "companyLogo": "pg",
+            "phone": "(704) 555-0127",
+            "email": "support@example.com",
+            "location": "101 Pine Street, Mountain View, Sierra County, CA 90210",
+            "contactPerson": {
+                "name": "Aadhya Sharma",
+                "phone": "(684) 555-0102",
+                "avatar": "/assets/Avatar.png"
+            },
+            "status": "active"
+        },
+        {
+            "id": "3",
+            "companyName": "Procter & Gamble",
+            "companyLogo": "mcdonalds",
+            "phone": "(603) 555-0123",
+            "email": "support@example.com",
+            "location": "222 Elm Road, Valley Springs, Alpine County, CA 93927",
+            "contactPerson": {
+                "name": "Aarav Verma",
+                "phone": "(603) 555-0123",
+                "avatar": "/assets/Avatar.png"
+            },
+            "status": "active"
+        },
+        {
+            "id": "4",
+            "companyName": "Procter & Gamble",
+            "companyLogo": "nasa",
+            "phone": "(219) 555-0114",
+            "email": "support@example.com",
+            "location": "345 Maple Drive, Forest Hills, Trinity County, CA 95814",
+            "contactPerson": {
+                "name": "Diya Patel",
+                "phone": "(704) 555-0127",
+                "avatar": "/assets/Avatar.png"
+            },
+            "status": "active"
+        },
+        {
+            "id": "5",
+            "companyName": "Procter & Gamble",
+            "companyLogo": "nbc",
+            "phone": "(201) 555-0124",
+            "email": "support@example.com",
+            "location": "456 Cherry Lane, Lakeside, Shasta County, CA 96003",
+            "contactPerson": {
+                "name": "Advik Singh",
+                "phone": "(270) 555-0117",
+                "avatar": "/assets/Avatar.png"
+            },
+            "status": "active"
+        },
+        {
+            "id": "6",
+            "companyName": "Procter & Gamble",
+            "companyLogo": "nasa",
+            "phone": "(702) 555-0122",
+            "email": "support@example.com",
+            "location": "567 Birch Court, Riverside, Plumas County, CA 94530",
+            "contactPerson": {
+                "name": "Anika Yadav",
+                "phone": "(239) 555-0108",
+                "avatar": "/assets/Avatar.png"
+            },
+            "status": "active"
+        },
+        {
+            "id": "7",
+            "companyName": "Procter & Gamble",
+            "companyLogo": "generic",
+            "phone": "(316) 555-0116",
+            "email": "support@example.com",
+            "location": "678 Willow Way, Oceanview, Mendocino County, CA 92647",
+            "contactPerson": {
+                "name": "Ira Khan",
+                "phone": "(808) 555-0111",
+                "avatar": "/assets/Avatar.png"
+            },
+            "status": "inactive"
+        },
+        {
+            "id": "8",
+            "companyName": "Procter & Gamble",
+            "companyLogo": "generic",
+            "phone": "(629) 555-0129",
+            "email": "support@example.com",
+            "location": "890 Cedar Street, Hilltop, Nevada County, CA 95602",
+            "contactPerson": {
+                "name": "Rohan Gupta",
+                "phone": "(505) 555-0125",
+                "avatar": "/assets/Avatar.png"
+            },
+            "status": "active"
+        },
+        {
+            "id": "9",
+            "companyName": "Procter & Gamble",
+            "companyLogo": "custom",
+            "phone": "(671) 555-0110",
+            "email": "support@example.com",
+            "location": "901 Oak Street, Sunset Ridge, El Dorado County, CA 95762",
+            "contactPerson": {
+                "name": "Siya Reddy",
+                "phone": "(907) 555-0101",
+                "avatar": "/assets/Avatar.png"
+            },
+            "status": "active"
+        }
+    ],
+    "pagination": {
+        "total": 13,
+        "perPage": 12,
+        "currentPage": 1,
+        "totalPages": 2
+    }
+}
