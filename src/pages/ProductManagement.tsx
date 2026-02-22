@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import productService, { IProduct, IProductListResponse } from '../services/ProductService';
+import productService, { IProductListResponse } from '../services/ProductService';
 import AddProductModal from '../components/products/add-product/AddProductModal';
 import { ProductStepBadge } from '../components/products/ProductStepBadge';
 import Avatar from '../components/common/Avatar';
