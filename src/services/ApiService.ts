@@ -153,7 +153,7 @@ class ApiService {
             // Handle 401 — auto-logout
             if (response.status === 401) {
                 this.clearSession();
-                window.location.href = '/login';
+                window.location.href = '/trazeit-admin/login';
                 throw new ApiError(401, 'Session expired. Please login again.', 'unauthorized');
             }
 

@@ -1,19 +1,21 @@
 import React, { useRef } from 'react';
+import { assetPath } from '../../../utils/assetPath';
 
 export interface ProductInfoData {
     image?: string;
     productName: string;
-    productType: string;
+    userType: string;
     imageFile?: File | null;
 }
 
 interface Step1Props {
     data: ProductInfoData;
     onUpdate: (data: Partial<ProductInfoData>) => void;
-    onNext: () => void;
+    onSubmit: () => void;
+    isEdit?: boolean;
 }
 
-const Step1_ProductInfo: React.FC<Step1Props> = ({ data, onUpdate, onNext }) => {
+const Step1_ProductInfo: React.FC<Step1Props> = ({ data, onUpdate, onSubmit, isEdit }) => {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +59,7 @@ const Step1_ProductInfo: React.FC<Step1Props> = ({ data, onUpdate, onNext }) => 
                         {data.imageFile ? (
                             <div className="flex flex-col items-center">
                                 <div className="w-16 h-16 rounded-lg bg-indigo-50 flex items-center justify-center mb-4 border border-indigo-100">
-                                    <img src="/assets/upload-icon.svg" alt="Upload" className="w-10 h-10" />
+                                    <img src={assetPath('assets/upload-icon.svg')} alt="Upload" className="w-10 h-10" />
                                 </div>
                                 <p className="text-sm font-semibold text-gray-900">{data.imageFile.name}</p>
                                 <p className="text-xs text-[#6941C6] mt-1 font-semibold">Change files</p>
@@ -65,7 +67,7 @@ const Step1_ProductInfo: React.FC<Step1Props> = ({ data, onUpdate, onNext }) => 
                         ) : (
                             <>
                                 <div className="w-12 h-12 mb-4 flex items-center justify-center">
-                                    <img src="/assets/upload-icon.svg" alt="Upload" className="w-12 h-12" />
+                                    <img src={assetPath('assets/upload-icon.svg')} alt="Upload" className="w-12 h-12" />
                                 </div>
                                 <p className="text-sm text-center">
                                     <span className="text-[#6941C6] font-semibold">Click to upload</span> or drag and drop
@@ -92,18 +94,17 @@ const Step1_ProductInfo: React.FC<Step1Props> = ({ data, onUpdate, onNext }) => 
 
                 {/* Type Selection */}
                 <div className="flex flex-col gap-3">
-                    <label className="block text-base font-medium text-gray-900">Product Type</label>
+                    <label className="block text-base font-medium text-gray-900">User Type</label>
                     <div className="relative">
                         <select
-                            value={data.productType}
-                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => onUpdate({ productType: e.target.value })}
+                            value={data.userType}
+                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => onUpdate({ userType: e.target.value })}
                             className="w-full px-4 py-4 rounded-xl border border-gray-200 focus:ring-4 focus:ring-indigo-50 focus:border-[#2E49B7] outline-none transition-all text-sm appearance-none bg-white text-gray-600"
                         >
-                            <option value="" disabled>Select Product Type</option>
-                            <option value="Vegetable">Vegetable</option>
-                            <option value="Fruit">Fruit</option>
-                            <option value="Herbal Infusions">Herbal Infusions</option>
-                            <option value="Fruit Beverages">Fruit Beverages</option>
+                            <option value="" disabled>Select User Type</option>
+                            <option value="producer">producer</option>
+                            <option value="processor">processor</option>
+                            <option value="retailer">retailer</option>
                         </select>
                         <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
                             <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -121,10 +122,10 @@ const Step1_ProductInfo: React.FC<Step1Props> = ({ data, onUpdate, onNext }) => 
             <div className="w-full h-px bg-[#D5D7DA] mb-2" />
             <div className="flex justify-end pr-4 lg:pr-10">
                 <button
-                    onClick={onNext}
+                    onClick={onSubmit}
                     className="px-8 py-3 rounded-xl bg-[#2E49B7] text-white font-semibold hover:bg-[#103778] transition-all text-sm shadow-[0px_4px_10px_rgba(46,73,183,0.25)]"
                 >
-                    Next
+                    {isEdit ? 'Update' : 'Save'}
                 </button>
             </div>
         </div>

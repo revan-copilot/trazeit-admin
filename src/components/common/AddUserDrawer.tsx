@@ -16,6 +16,7 @@ const AddUserDrawer: React.FC<AddUserDrawerProps> = ({ isOpen, onClose, type, on
     const [location, setLocation] = useState('');
     const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
     const [errors, setErrors] = useState<Record<string, string>>({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const isEdit = !!initialData;
@@ -86,12 +87,19 @@ const AddUserDrawer: React.FC<AddUserDrawerProps> = ({ isOpen, onClose, type, on
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = () => {
-        if (!validateForm()) return;
+    const handleSubmit = async () => {
+        if (!validateForm() || isSubmitting) return;
 
-        onAdd({ name, email, phone, location, avatar: avatarPreview, role: type });
-        resetForm();
-        onClose();
+        try {
+            setIsSubmitting(true);
+            await onAdd({ name, email, phone, location, avatar: avatarPreview, role: type });
+            resetForm();
+            onClose();
+        } catch (err) {
+            console.error('Failed to submit user:', err);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const resetForm = () => {
@@ -280,9 +288,13 @@ const AddUserDrawer: React.FC<AddUserDrawerProps> = ({ isOpen, onClose, type, on
                     </button>
                     <button
                         onClick={handleSubmit}
-                        className="px-4 py-2 text-sm font-medium text-white bg-[#5D7299] rounded-lg hover:bg-[#4B5E80] transition-colors"
+                        disabled={isSubmitting}
+                        className={`w-full py-3 rounded-lg text-white font-semibold transition-all shadow-md flex items-center justify-center gap-2 ${isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-primary hover:bg-primary/90'
+                            }`}
                     >
-                        {title}
+                        {isSubmitting ? (
+                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        ) : title}
                     </button>
                 </div>
             </div>

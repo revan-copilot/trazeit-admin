@@ -1,10 +1,14 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
+
 import userService, { IUser, IUserQueryParams } from '../services/UserService';
 import StatusBadge from '../components/common/StatusBadge';
 import Avatar from '../components/common/Avatar';
 import DataTable from '../components/common/DataTable';
 import TablePagination from '../components/common/TablePagination';
 import AddUserDrawer from '../components/common/AddUserDrawer';
+import SuccessPopup from '../components/common/SuccessPopup';
+import Toast from '../components/common/Toast';
 import { useAuth } from '../context/AuthContext';
 
 // ──────────────────────────────────────────────
@@ -35,7 +39,6 @@ function formatLocation(user: IUser): string {
 const UserManagement: React.FC = () => {
     const { user: authUser } = useAuth();
     const isSuperAdmin = authUser?.userType?.includes('super_admin') ?? false;
-    const [activeTab, setActiveTab] = useState<'admin' | 'user'>('admin');
     const [users, setUsers] = useState<IUser[]>([]);
     const [totalCount, setTotalCount] = useState(0);
     const [loading, setLoading] = useState(true);
@@ -47,6 +50,9 @@ const UserManagement: React.FC = () => {
         { key: 'createdAt', direction: 'asc' }
     );
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [lastAction, setLastAction] = useState<'added' | 'updated'>('added');
 
     // ── Fetch Data ──────────────────────────────
 
@@ -61,9 +67,7 @@ const UserManagement: React.FC = () => {
                 textSearch: searchTerm || undefined,
             };
 
-            const result = activeTab === 'admin'
-                ? await userService.getAdminUsers(params)
-                : await userService.getNonAdminUsers(params);
+            const result = await userService.getNonAdminUsers(params);
 
             setUsers(result.users);
             setTotalCount(result.totalCount);
@@ -74,21 +78,21 @@ const UserManagement: React.FC = () => {
         } finally {
             setLoading(false);
         }
-    }, [activeTab, currentPage, rowsPerPage, sortConfig, searchTerm]);
+    }, [currentPage, rowsPerPage, sortConfig, searchTerm]);
 
     useEffect(() => {
         loadUsers();
     }, [loadUsers]);
 
-    // Reset to page 1 when tab, search, or rows-per-page changes
+    // Reset to page 1 when search or rows-per-page changes
     useEffect(() => {
         setCurrentPage(1);
-    }, [activeTab, searchTerm, rowsPerPage]);
+    }, [searchTerm, rowsPerPage]);
 
     // ── Sorting ─────────────────────────────────
 
     const handleSort = (key: string) => {
-        setSortConfig((prev: { key: string; direction: 'asc' | 'desc' } | null) => {
+        setSortConfig((prev) => {
             if (prev && prev.key === key && prev.direction === 'asc') {
                 return { key, direction: 'desc' };
             }
@@ -103,11 +107,11 @@ const UserManagement: React.FC = () => {
     const endIndex = Math.min(startIndex + users.length, totalCount);
 
     const handlePrevPage = () => {
-        if (currentPage > 1) setCurrentPage(currentPage - 1);
+        if (currentPage > 1) setCurrentPage(prev => prev - 1);
     };
 
     const handleNextPage = () => {
-        if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+        if (currentPage < totalPages) setCurrentPage(prev => prev + 1);
     };
 
     // ── Render ──────────────────────────────────
@@ -122,28 +126,6 @@ const UserManagement: React.FC = () => {
                         Easily toggle between activating and deactivating users to manage their access and visibility.
                     </p>
                 </div>
-            </div>
-
-            {/* Tabs */}
-            <div className="bg-white p-1.5 rounded-xl inline-flex gap-1.5 border-none shadow-sm">
-                <button
-                    onClick={() => setActiveTab('admin')}
-                    className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 border-2 border-white ${activeTab === 'admin'
-                        ? 'bg-[linear-gradient(45deg,#A6C0FE_0%,#E6ECFB_100%)] text-[#101828] shadow-sm'
-                        : 'bg-transparent text-[#101828]/60 hover:bg-gray-50'
-                        }`}
-                >
-                    Admin Management
-                </button>
-                <button
-                    onClick={() => setActiveTab('user')}
-                    className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 border-2 border-white ${activeTab === 'user'
-                        ? 'bg-[linear-gradient(45deg,#A6C0FE_0%,#E6ECFB_100%)] text-[#101828] shadow-sm'
-                        : 'bg-transparent text-[#101828]/60 hover:bg-gray-50'
-                        }`}
-                >
-                    User Management
-                </button>
             </div>
 
             {/* Search and Actions Bar */}
@@ -172,16 +154,14 @@ const UserManagement: React.FC = () => {
                     </svg>
                 </button>
 
-                {/* Add User/Admin Button */}
-                {activeTab === 'admin' && (
-                    <button
-                        onClick={() => setIsDrawerOpen(true)}
-                        className="py-2.5 bg-primary text-white rounded-lg hover:bg-primary-600 transition-all font-medium text-sm shadow-sm flex items-center justify-center min-w-[124px]"
-                        style={{ width: '15%' }}
-                    >
-                        Add Admin
-                    </button>
-                )}
+                {/* Add User Button */}
+                <button
+                    onClick={() => setIsDrawerOpen(true)}
+                    className="py-2.5 bg-primary text-white rounded-lg hover:bg-primary-600 transition-all font-medium text-sm shadow-sm flex items-center justify-center min-w-[124px]"
+                    style={{ width: '15%' }}
+                >
+                    Add User
+                </button>
             </div>
 
             <AddUserDrawer
@@ -190,7 +170,7 @@ const UserManagement: React.FC = () => {
                     setIsDrawerOpen(false);
                     setEditingUser(null);
                 }}
-                type={activeTab}
+                type="user"
                 initialData={editingUser ? {
                     id: editingUser._id,
                     name: `${editingUser.firstName} ${editingUser.lastName}`,
@@ -199,188 +179,141 @@ const UserManagement: React.FC = () => {
                     location: formatLocation(editingUser),
                     status: editingUser.status,
                     avatar: editingUser.profilePic,
-                    role: activeTab,
+                    role: 'user',
                 } : null}
-                onAdd={(newData) => {
-                    if (editingUser) {
-                        console.log('Update user data:', newData);
-                    } else {
-                        console.log('New user data:', newData);
+                onAdd={async (newData) => {
+                    try {
+                        if (editingUser) {
+                            const nameParts = newData.name.trim().split(/\s+/);
+                            const firstName = nameParts[0] || editingUser.firstName;
+                            const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : (editingUser.lastName || '');
+
+                            await userService.updateUser(editingUser._id, {
+                                ...newData,
+                                firstName,
+                                lastName
+                            });
+                            setLastAction('updated');
+                        } else {
+                            await userService.createUser(newData);
+                            setLastAction('added');
+                        }
+                        setIsDrawerOpen(false);
+                        setIsSuccess(true);
+                        setTimeout(() => {
+                            setIsSuccess(false);
+                            setEditingUser(null);
+                        }, 2500);
+                        loadUsers();
+                    } catch (err: any) {
+                        console.error('Failed to save user:', err);
+                        setError(err.message || 'Failed to save details. Please try again.');
+                        setTimeout(() => setError(null), 4000);
+                        throw err;
                     }
-                    setIsDrawerOpen(false);
-                    setEditingUser(null);
-                    loadUsers();
                 }}
             />
 
+            <SuccessPopup
+                isOpen={isSuccess}
+                message={`You have successfully ${lastAction}\nthe user`}
+            />
+            {error && <Toast message={error} type="error" />}
+
             {/* Table */}
             <DataTable
-                columns={activeTab === 'admin'
-                    ? [
-                        // ── Admin Tab Columns ──────────────
-                        {
-                            header: 'ADMIN NAME',
-                            key: 'firstName',
-                            sortable: true,
-                            render: (user: IUser) => (
-                                <div className="flex items-center gap-3">
-                                    <Avatar
-                                        src={user.profilePic}
-                                        firstName={user.firstName}
-                                        lastName={user.lastName}
-                                        size="sm"
-                                        className="border border-[#D5D7DA]"
-                                    />
-                                    <span className="text-sm font-medium text-[#101828]">
+                columns={[
+                    {
+                        header: 'USER NAME',
+                        key: 'firstName',
+                        sortable: true,
+                        render: (user: IUser) => (
+                            <div className="flex items-start gap-3">
+                                <Avatar
+                                    src={user.profilePic}
+                                    firstName={user.firstName}
+                                    lastName={user.lastName}
+                                    size="sm"
+                                    className="border border-[#D5D7DA]"
+                                />
+                                <div className="flex flex-col">
+                                    <span className="text-sm font-medium text-[#101828] mb-1">
                                         {user.firstName} {user.lastName}
                                     </span>
-                                </div>
-                            )
-                        },
-                        {
-                            header: 'CONTACT NO.',
-                            key: 'phone',
-                            render: (user: IUser) => (
-                                <span className="text-sm text-[#475467]">
-                                    (+{user.countryCode}) {user.phone}
-                                </span>
-                            )
-                        },
-                        {
-                            header: 'EMAIL',
-                            key: 'email',
-                            render: (user: IUser) => (
-                                <span className="text-sm text-[#475467]">{user.email}</span>
-                            )
-                        },
-                        {
-                            header: 'LOCATION',
-                            key: 'city',
-                            render: (user: IUser) => (
-                                <span className="text-sm text-[#475467]">{formatLocation(user)}</span>
-                            )
-                        },
-                        {
-                            header: 'STATUS',
-                            key: 'status',
-                            render: (user: IUser) => <StatusBadge status={user.status} />
-                        },
-                        {
-                            header: 'ACTION',
-                            key: 'action',
-                            width: '10%',
-                            render: (user: IUser) => (
-                                <div className="flex items-center gap-1">
-                                    <button
-                                        onClick={() => {
-                                            setEditingUser(user);
-                                            setIsDrawerOpen(true);
-                                        }}
-                                        className="p-2 text-[#475467] hover:text-primary hover:bg-gray-100 rounded-lg transition-colors"
-                                        title="Edit"
-                                    >
-                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                        </svg>
-                                    </button>
-                                    <button className="p-2 text-[#475467] hover:text-primary hover:bg-gray-100 rounded-lg transition-colors" title="More">
-                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            )
-                        }
-                    ]
-                    : [
-                        // ── User Tab Columns ──────────────
-                        {
-                            header: 'USER NAME',
-                            key: 'firstName',
-                            sortable: true,
-                            render: (user: IUser) => (
-                                <div className="flex items-start gap-3">
-                                    <Avatar
-                                        src={user.profilePic}
-                                        firstName={user.firstName}
-                                        lastName={user.lastName}
-                                        size="sm"
-                                        className="border border-[#D5D7DA]"
-                                    />
-                                    <div className="flex flex-col">
-                                        <span className="text-sm font-medium text-[#101828] mb-1">
-                                            {user.firstName} {user.lastName}
-                                        </span>
-                                        <div className="flex items-center gap-2 text-xs text-[#667085]">
-                                            <div className="flex items-center gap-1">
-                                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                                                </svg>
-                                                +{user.countryCode} {user.phone}
-                                            </div>
-                                            <div className="w-px h-3 bg-[#667085]"></div>
-                                            <div className="flex items-center gap-1">
-                                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                                </svg>
-                                                {user.email}
-                                            </div>
+                                    <div className="flex items-center gap-2 text-xs text-[#667085]">
+                                        <div className="flex items-center gap-1">
+                                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                            </svg>
+                                            +{user.countryCode} {user.phone}
+                                        </div>
+                                        <div className="w-px h-3 bg-[#667085]"></div>
+                                        <div className="flex items-center gap-1">
+                                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                            </svg>
+                                            {user.email}
                                         </div>
                                     </div>
                                 </div>
-                            )
-                        },
-                        {
-                            header: 'ROLE',
-                            key: 'userType',
-                            align: 'center',
-                            render: (user: IUser) => (
-                                <span className="text-sm text-[#475467]">{formatUserType(user.userType)}</span>
-                            )
-                        },
-                        {
-                            header: 'LOCATION',
-                            key: 'city',
-                            align: 'center',
-                            render: (user: IUser) => (
-                                <span className="text-sm text-[#475467]">{formatLocation(user)}</span>
-                            )
-                        },
-                        {
-                            header: 'STATUS',
-                            key: 'status',
-                            render: (user: IUser) => <StatusBadge status={user.status} />
-                        },
-                        {
-                            header: 'ACTION',
-                            key: 'action',
-                            width: '12%',
-                            render: (user: IUser) => (
-                                <div className="flex items-center gap-1">
-                                    {isSuperAdmin && (
-                                        <button
-                                            onClick={() => {
-                                                setEditingUser(user);
-                                                setIsDrawerOpen(true);
-                                            }}
-                                            className="p-2 text-[#475467] hover:text-primary hover:bg-gray-100 rounded-lg transition-colors"
-                                            title="Edit"
-                                        >
-                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                            </svg>
-                                        </button>
-                                    )}
-                                    <button className="p-2 text-[#475467] hover:text-primary hover:bg-gray-100 rounded-lg transition-colors" title="More">
-                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            )
-                        }
-                    ]
-                }
+                            </div>
+                        )
+                    },
+                    {
+                        header: 'ROLE',
+                        key: 'userType',
+                        align: 'center',
+                        render: (user: IUser) => (
+                            <span className="text-sm text-[#475467]">{formatUserType(user.userType)}</span>
+                        )
+                    },
+                    {
+                        header: 'LOCATION',
+                        key: 'city',
+                        align: 'center',
+                        render: (user: IUser) => (
+                            <span className="text-sm text-[#475467]">{formatLocation(user)}</span>
+                        )
+                    },
+                    {
+                        header: 'STATUS',
+                        key: 'status',
+                        render: (user: IUser) => <StatusBadge status={user.status} />
+                    },
+                    {
+                        header: 'ACTION',
+                        key: 'action',
+                        width: '12%',
+                        render: (user: IUser) => (
+                            <div className="flex items-center gap-1">
+                                {isSuperAdmin && (
+                                    <button
+                                        onClick={() => {
+                                             setEditingUser(user);
+                                             setIsDrawerOpen(true);
+                                         }}
+                                         className="p-2 text-[#475467] hover:text-primary hover:bg-gray-100 rounded-lg transition-colors"
+                                         title="Edit"
+                                     >
+                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                         </svg>
+                                     </button>
+                                 )}
+                                 <Link
+                                     to={`/user-management/${user._id}`}
+                                     className="p-2 text-[#475467] hover:text-primary hover:bg-gray-100 rounded-lg transition-colors"
+                                     title="View Details"
+                                 >
+                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                     </svg>
+                                 </Link>
+                            </div>
+                        )
+                    }
+                ]}
                 data={users}
                 loading={loading}
                 onSort={handleSort}

@@ -36,7 +36,7 @@ const DataTable = <T extends { id?: string | number; _id?: string }>({
                 </div>
             ) : (
                 <div className="overflow-x-auto">
-                    <table className="w-full border-collapse">
+                    <table className="w-full border-collapse rounded-xl border-2 border-white shadow-sm">
                         <thead>
                             <tr className="border-b border-[#D5D7DA] bg-[#F8F8F8]">
                                 {columns.map((column, idx) => (

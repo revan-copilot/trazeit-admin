@@ -1,14 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import productService, { IProductListResponse } from '../services/ProductService';
+import { useNavigate } from 'react-router-dom';
 import AddProductModal from '../components/products/add-product/AddProductModal';
-import { ProductStepBadge } from '../components/products/ProductStepBadge';
+
 import Avatar from '../components/common/Avatar';
 
 const ProductManagement: React.FC = () => {
+    const navigate = useNavigate();
     const [data, setData] = useState<IProductListResponse | null>(null);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [isAddProductOpen, setIsAddProductOpen] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState<any>(null);
+
+    const handleEditProduct = (product: any) => {
+        setSelectedProduct(product);
+        setIsAddProductOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsAddProductOpen(false);
+        setSelectedProduct(null);
+        loadProducts(); // Reload to reflect changes if any
+    };
 
     useEffect(() => {
         loadProducts();
@@ -41,7 +55,7 @@ const ProductManagement: React.FC = () => {
     const totalItems = 13;
 
     return (
-        <div className="flex flex-col gap-6">
+        <div className="space-y-6">
             {/* Header */}
             <div>
                 <h1 className="text-2xl font-bold text-gray-900">Product Management</h1>
@@ -52,10 +66,10 @@ const ProductManagement: React.FC = () => {
 
             {/* Controls Bar */}
             <div className="flex items-center gap-3">
-                {/* Search */}
-                <div className="flex-1">
+                {/* Search Input */}
+                <div className="flex-1 bg-white/60 backdrop-blur-md rounded-xl shadow-sm">
                     <div className="relative">
-                        <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#101828]/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                         <input
@@ -63,38 +77,41 @@ const ProductManagement: React.FC = () => {
                             placeholder="Search by name, keywords & more"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full pl-12 pr-4 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400 text-sm placeholder:text-gray-400"
+                            className="w-full pl-12 pr-4 py-2.5 bg-transparent rounded-lg focus:outline-none focus:ring-0 text-sm text-[#101828] placeholder-[#101828]/40"
                         />
                     </div>
                 </div>
 
                 {/* All Product Dropdown */}
-                <button className="flex items-center justify-between gap-2 px-4 py-2.5 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors min-w-[160px]">
-                    <span className="text-gray-900 text-sm font-medium">All Product</span>
+                <button className="flex items-center justify-between gap-2 px-4 py-2.5 bg-white border border-[#D5D7DA] rounded-lg hover:bg-gray-50 transition-colors min-w-[160px]">
+                    <span className="text-[#344054] text-sm font-medium">All Product</span>
                     <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
 
                 {/* Filters Button */}
-                <button className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-                    <span className="text-gray-900 text-sm font-medium">Filters</span>
-                    <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                <button className="flex items-center gap-2 px-4 py-2.5 bg-white border border-[#D5D7DA] rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium text-[#344054]">
+                    <span>Filters</span>
+                    <svg className="w-4 h-4 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 </button>
 
                 {/* Add Product Button */}
                 <button
-                    onClick={() => setIsAddProductOpen(true)}
-                    className="flex items-center gap-2 px-6 py-2.5 bg-[#1F2937] text-white rounded-lg hover:bg-gray-800 transition-colors font-medium text-sm"
+                    onClick={() => {
+                        setSelectedProduct(null);
+                        setIsAddProductOpen(true);
+                    }}
+                    className="flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-white rounded-lg hover:bg-primary-600 transition-colors font-medium text-sm shadow-sm min-w-[124px]"
                 >
                     Add Product
                 </button>
             </div>
 
             {/* Table Container */}
-            <div className="rounded-xl shadow-sm overflow-hidden bg-white/60 backdrop-blur-[62.8px] border border-white/20">
+            <div className="rounded-xl shadow-sm overflow-hidden bg-white">
                 {loading ? (
                     <div className="flex items-center justify-center py-20">
                         <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary-600"></div>
@@ -113,21 +130,14 @@ const ProductManagement: React.FC = () => {
                                                 </svg>
                                             </div>
                                         </th>
+
                                         <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                            PRODUCT STEPS
-                                        </th>
-                                        <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                            <div className="flex items-center gap-1 cursor-pointer hover:text-gray-700">
-                                                PRODUCT TYPE
-                                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                                                </svg>
-                                            </div>
-                                        </th>
-                                        <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                            STATUS
+                                            USER TYPE
                                         </th>
                                         <th className="text-center px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                            STATUS
+                                        </th>
+                                        <th className="text-right px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                                             ACTION
                                         </th>
                                     </tr>
@@ -144,45 +154,43 @@ const ProductManagement: React.FC = () => {
                                                 </div>
                                             </td>
 
-                                            {/* Product Steps */}
-                                            <td className="px-6 py-4">
-                                                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar max-w-[500px]">
-                                                    {product.steps.map((step, idx) => (
-                                                        <ProductStepBadge key={idx} name={step.name} quantity={step.quantity} />
-                                                    ))}
-                                                    {/* +4 Badge */}
-                                                    <div className="flex items-center justify-center bg-blue-50 text-blue-600 font-medium text-xs rounded-lg px-2.5 py-1.5 h-[30px] border border-blue-100 min-w-[32px]">
-                                                        +4
-                                                    </div>
-                                                </div>
-                                            </td>
+
 
                                             {/* Product Type */}
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                <span className="text-gray-600 text-sm">{product.type}</span>
+                                                <span className="text-sm text-gray-600">{(product as any).userType || product.type}</span>
                                             </td>
 
                                             {/* Status */}
-                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${product.status === 'ACTIVE'
-                                                    ? 'bg-green-50 text-green-700'
-                                                    : 'bg-red-50 text-red-700'
+                                            <td className="px-6 py-4 whitespace-nowrap text-center">
+                                                <span className={`inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold tracking-wider ${String(product.status).toUpperCase() === 'ACTIVE'
+                                                    ? 'bg-[#E6F9F4] text-[#2DB389]'
+                                                    : 'bg-[#FFF0ED] text-[#FF5C41]'
                                                     }`}>
-                                                    {product.status}
+                                                    {String(product.status).toUpperCase() === 'ACTIVE' ? 'ACTIVE' : 'IN ACTIVE'}
                                                 </span>
                                             </td>
 
                                             {/* Actions */}
-                                            <td className="px-6 py-4 whitespace-nowrap text-center">
-                                                <div className="flex items-center justify-center gap-2">
-                                                    <button className="p-1.5 text-gray-400 hover:text-gray-600 transition-colors">
+                                            <td className="px-6 py-4 whitespace-nowrap text-right">
+                                                <div className="flex items-center justify-end gap-1">
+                                                    <button
+                                                        onClick={() => handleEditProduct(product)}
+                                                        className="p-2 text-[#475467] hover:text-primary hover:bg-gray-100 rounded-lg transition-colors"
+                                                        title="Edit Product"
+                                                    >
                                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                                         </svg>
                                                     </button>
-                                                    <button className="p-1.5 text-gray-400 hover:text-gray-600 transition-colors">
+                                                    <button
+                                                        onClick={() => navigate(`/products/${product.id}`)}
+                                                        className="p-2 text-[#475467] hover:text-primary hover:bg-gray-100 rounded-lg transition-colors"
+                                                        title="View Details"
+                                                    >
                                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                                         </svg>
                                                     </button>
                                                 </div>
@@ -226,7 +234,8 @@ const ProductManagement: React.FC = () => {
                         {/* Add Product Modal */}
                         <AddProductModal
                             isOpen={isAddProductOpen}
-                            onClose={() => setIsAddProductOpen(false)}
+                            onClose={handleCloseModal}
+                            initialData={selectedProduct}
                         />
                     </>
                 )}

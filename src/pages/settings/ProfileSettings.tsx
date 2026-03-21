@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth, IAuthUser } from '../../context/AuthContext';
 import Avatar from '../../components/common/Avatar';
+import { assetPath } from '../../utils/assetPath';
 
 const ProfileSettings: React.FC = () => {
     const { user, updateUser } = useAuth();
@@ -288,7 +289,7 @@ const ProfileSettings: React.FC = () => {
                                     >
                                         <div className="mb-3">
                                             <img
-                                                src="/assets/upload-icon.svg"
+                                                src={assetPath('assets/upload-icon.svg')}
                                                 alt="Upload"
                                                 className="w-10 h-10 object-contain"
                                             />

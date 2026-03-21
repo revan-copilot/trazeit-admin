@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { assetPath } from '../../../utils/assetPath';
 
 export interface ProcessStep {
     id: string;
@@ -116,7 +117,7 @@ const Step2_ProductProcess: React.FC<Step2Props> = ({ data, onUpdate, onNext, on
                                         className="w-full px-4 py-[10px] rounded-lg border border-[#D0D5DD] focus:ring-1 focus:ring-primary/40 focus:border-[#2E49B7] outline-none transition-all placeholder-[#98A2B3] text-[14px] text-gray-900 bg-white shadow-sm"
                                     />
                                     <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
-                                        <img src="/assets/calendar.svg" alt="calendar" className="w-5 h-5 opacity-60" />
+                                        <img src={assetPath('assets/calendar.svg')} alt="calendar" className="w-5 h-5 opacity-60" />
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +140,7 @@ const Step2_ProductProcess: React.FC<Step2Props> = ({ data, onUpdate, onNext, on
                                         className="w-full px-4 py-[10px] rounded-lg border border-[#D0D5DD] focus:ring-1 focus:ring-primary/40 focus:border-[#2E49B7] outline-none transition-all placeholder-[#98A2B3] text-[14px] text-gray-900 bg-white shadow-sm"
                                     />
                                     <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
-                                        <img src="/assets/calendar.svg" alt="calendar" className="w-5 h-5 opacity-60" />
+                                        <img src={assetPath('assets/calendar.svg')} alt="calendar" className="w-5 h-5 opacity-60" />
                                     </div>
                                 </div>
                             </div>

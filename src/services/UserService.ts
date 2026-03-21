@@ -45,6 +45,30 @@ export interface IUser {
     updatedAt: string;
 }
 
+export interface IProperty {
+    _id: string;
+    id?: string;
+    name: string;
+    address1: string;
+    address2: string;
+    city: string;
+    state: string;
+    country: string;
+    postalCode: string;
+    user: string;
+    images?: string[];
+    location: {
+        type: string;
+        coordinates: number[];
+    };
+    data?: {
+        Size?: string;
+        [key: string]: any;
+    };
+    createdAt?: string;
+    updatedAt?: string;
+}
+
 export interface IUserApiResponse {
     statusCode: number;
     status: string;
@@ -133,22 +157,6 @@ class UserService {
         };
     }
 
-    /**
-     * Get admin users only (userType includes "admin").
-     * Fetches from the same /user endpoint, then filters client-side.
-     */
-    async getAdminUsers(params: IUserQueryParams = {}): Promise<IUserListResult> {
-        const result = await this.fetchUsers(params);
-        const admins = result.users.filter(u =>
-            u.userType.includes('admin')
-        );
-
-        return {
-            ...result,
-            users: admins,
-            totalCount: admins.length,
-        };
-    }
 
     /**
      * Get non-admin users (userType does NOT include "admin" or "super_admin").
@@ -179,7 +187,7 @@ class UserService {
      * Update a user via API
      */
     async updateUser(id: string, data: Partial<IUser>): Promise<IUser> {
-        const response = await apiService.put<{ data: IUser }>(`/user/${id}`, data);
+        const response = await apiService.patch<{ data: IUser }>(`/user/${id}`, data);
         return response.data;
     }
 
@@ -188,6 +196,36 @@ class UserService {
      */
     async deleteUser(id: string): Promise<void> {
         await apiService.delete<void>(`/user/${id}`);
+    }
+
+    /**
+     * Get user by ID
+     */
+    async getUserById(id: string): Promise<IUser> {
+        return apiService.get<IUser>(`/user/${id}`);
+    }
+
+    /**
+     * Get user properties
+     */
+    async getUserProperties(userId: string): Promise<IProperty[]> {
+        const response = await apiService.get<any>(`/user-property?filters=user|${userId}`);
+        // Handle response envelope if necessary
+        return response?.data || response || [];
+    }
+
+    /**
+     * Assign property to user
+     */
+    async assignProperty(data: any): Promise<IProperty> {
+        return apiService.post<IProperty>('/user-property', data);
+    }
+
+    /**
+     * Update property via API
+     */
+    async updateProperty(id: string, data: any): Promise<IProperty> {
+        return apiService.patch<IProperty>(`/user-property/${id}`, data);
     }
 }
 

@@ -4,28 +4,38 @@ import DashboardLayout from './components/layout/DashboardLayout';
 import ProductManagement from './pages/ProductManagement';
 import QuestionManagement from './pages/QuestionManagement';
 import UserManagement from './pages/UserManagement';
+import CompanyManagement from './pages/CompanyManagement';
 import QRManagement from './pages/QRManagement';
 import SettingsLayout from './components/layout/SettingsLayout';
 import ProfileSettings from './pages/settings/ProfileSettings';
 import QRDetails from './pages/QRDetails';
+import ProductDetail from './pages/ProductDetail';
+import CompanyDetail from './pages/CompanyDetail';
+import UserDetail from './pages/UserDetail';
+
+
 
 function App() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="/trazeit-admin">
             <Routes>
                 {/* Public Routes */}
                 <Route path="/login" element={<Login />} />
 
                 {/* Protected Routes */}
                 <Route element={<DashboardLayout />}>
-                    <Route path="/dashboard" element={<Navigate to="/user-management" replace />} />
-                    <Route path="/admin-management" element={<Navigate to="/user-management" replace />} />
+                    <Route path="/dashboard" element={<Navigate to="/company-management" replace />} />
+                    <Route path="/company-management" element={<CompanyManagement />} />
+                    <Route path="/company-management/:id" element={<CompanyDetail />} />
+
                     <Route path="/user-management" element={<UserManagement />} />
+                    <Route path="/user-management/:id" element={<UserDetail />} />
+
                     <Route path="/products" element={<ProductManagement />} />
+                    <Route path="/products/:id" element={<ProductDetail />} />
                     <Route path="/qr-management" element={<QRManagement />} />
                     <Route path="/qr-management/:id" element={<QRDetails />} />
                     <Route path="/documents" element={<QuestionManagement />} />
-                    <Route path="/tasks" element={<ComingSoon title="Tasks" />} />
                     <Route path="/maximize" element={<ComingSoon title="Maximize" />} />
                     <Route path="/help" element={<ComingSoon title="Help" />} />
 

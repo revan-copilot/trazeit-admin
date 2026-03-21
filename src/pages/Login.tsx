@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../components/common/Button';
 import Input from '../components/common/Input';
 import { useAuth } from '../context/AuthContext';
+import { assetPath } from '../utils/assetPath';
 
 const Login: React.FC = () => {
     const navigate = useNavigate();
@@ -54,7 +55,7 @@ const Login: React.FC = () => {
                 {/* Logo */}
                 <div className="text-center mb-8">
                     <img
-                        src="/assets/trazeit-logo-blue.png"
+                        src={assetPath('assets/trazeit-logo-blue.png')}
                         alt="Trazeit Logo"
                         className="h-12 mx-auto mb-6"
                     />

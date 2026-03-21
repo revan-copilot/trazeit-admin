@@ -1,13 +1,19 @@
 import React from 'react';
 
 interface CompanyLogoProps {
-    type: string;
+    type?: string;
+    imageUrl?: string;
+    name?: string;
     className?: string;
 }
 
-const CompanyLogo: React.FC<CompanyLogoProps> = ({ type, className = '' }) => {
+const CompanyLogo: React.FC<CompanyLogoProps> = ({ type, imageUrl, name, className = '' }) => {
     // Generate a branded logo based on type
     const getLogoStyle = () => {
+        if (imageUrl) return null;
+
+        const content = name ? name.charAt(0).toUpperCase() : '?';
+
         switch (type) {
             case 'pg':
                 return { bg: 'bg-blue-600', text: 'text-white', content: 'P&G' };
@@ -20,7 +26,7 @@ const CompanyLogo: React.FC<CompanyLogoProps> = ({ type, className = '' }) => {
             case 'custom':
                 return { bg: 'bg-teal-500', text: 'text-white', content: 'C' };
             default:
-                return { bg: 'bg-gray-400', text: 'text-white', content: '?' };
+                return { bg: 'bg-gray-400', text: 'text-white', content: content };
         }
     };
 
@@ -28,9 +34,13 @@ const CompanyLogo: React.FC<CompanyLogoProps> = ({ type, className = '' }) => {
 
     return (
         <div
-            className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold ${style.bg} ${style.text} ${className}`}
+            className={`w-10 h-10 rounded-lg flex items-center justify-center text-xs font-bold overflow-hidden ${style?.bg || 'bg-gray-100'} ${style?.text || ''} ${className}`}
         >
-            {style.content}
+            {imageUrl ? (
+                <img src={imageUrl} alt={name} className="w-full h-full object-cover" />
+            ) : (
+                style?.content
+            )}
         </div>
     );
 };

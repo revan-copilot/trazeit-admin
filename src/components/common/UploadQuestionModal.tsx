@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { assetPath } from '../../utils/assetPath';
 
 interface UploadQuestionModalProps {
     isOpen: boolean;
@@ -124,7 +125,7 @@ const UploadQuestionModal: React.FC<UploadQuestionModalProps> = ({ isOpen, onClo
         return (
             <div className="fixed inset-0 z-[110] flex items-center justify-center bg-gray-900/40 backdrop-blur-sm">
                 <div className="bg-white rounded-[16px] w-[380px] py-12 px-10 flex flex-col items-center shadow-xl">
-                    <img src="/assets/success.gif" alt="Success" className="w-[80px] h-[80px] mb-6" />
+                    <img src={assetPath('assets/success.gif')} alt="Success" className="w-[80px] h-[80px] mb-6" />
                     <h3 className="text-center text-[16px] font-medium text-[#101828]">
                         You have successfully created<br />the list of question
                     </h3>

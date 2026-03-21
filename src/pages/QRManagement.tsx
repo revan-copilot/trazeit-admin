@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import qrService, { IQRCode, IQRListResponse } from '../services/QRService';
 import DataTable from '../components/common/DataTable';
 import TablePagination from '../components/common/TablePagination';
+import { assetPath } from '../utils/assetPath';
 
 const GradeBadge: React.FC<{ text: string; type: 'green' | 'blue' | 'orange' }> = ({ text, type }) => {
     const styles = {
@@ -12,9 +13,9 @@ const GradeBadge: React.FC<{ text: string; type: 'green' | 'blue' | 'orange' }> 
     };
 
     const icons: Record<'green' | 'blue' | 'orange', string> = {
-        green: '/assets/Leaf--Streamline-Lucide.svg',
-        blue: '/assets/Shield--Streamline-Lucide.svg',
-        orange: '/assets/Award--Streamline-Lucide.svg',
+        green: assetPath('assets/Leaf--Streamline-Lucide.svg'),
+        blue: assetPath('assets/Shield--Streamline-Lucide.svg'),
+        orange: assetPath('assets/Award--Streamline-Lucide.svg'),
     };
 
     return (
@@ -137,7 +138,7 @@ const QRManagement: React.FC = () => {
                         </svg>
                         <input
                             type="text"
-                            placeholder="Search by keywords & more"
+                            placeholder="Search by name, keywords & more"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             className="w-full pl-12 pr-4 py-2.5 bg-transparent rounded-lg focus:outline-none focus:ring-0 text-sm text-[#101828] placeholder-[#101828]/40"
@@ -165,7 +166,7 @@ const QRManagement: React.FC = () => {
                                 <div className="flex items-center gap-1.5 text-[11px] text-[#667085] mt-1 font-normal">
                                     <span className="flex items-center gap-1 whitespace-nowrap">
                                         <img
-                                            src="/assets/Qr-Code-2--Streamline-Rounded-Material.svg"
+                                            src={assetPath('assets/Qr-Code-2--Streamline-Rounded-Material.svg')}
                                             alt=""
                                             className="w-4 h-4 object-contain"
                                         />

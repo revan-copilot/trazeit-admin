@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import qrService, { IQRCode } from '../services/QRService';
+import { assetPath } from '../utils/assetPath';
 
 const QRDetails: React.FC = () => {
     const navigate = useNavigate();
@@ -83,7 +84,7 @@ const QRDetails: React.FC = () => {
                                 <div className="flex items-center gap-4 text-sm text-[#475467] mb-6">
                                     <span className="flex items-center gap-2">
                                         <img
-                                            src="/assets/Qr-Code-2--Streamline-Rounded-Material.svg"
+                                            src={assetPath('assets/Qr-Code-2--Streamline-Rounded-Material.svg')}
                                             alt=""
                                             className="w-5 h-5 object-contain"
                                         />
@@ -189,9 +190,9 @@ const Badge: React.FC<{ text: string; type: 'green' | 'blue' | 'orange' }> = ({ 
     };
 
     const icons: Record<'green' | 'blue' | 'orange', string> = {
-        green: '/assets/Leaf--Streamline-Lucide.svg',
-        blue: '/assets/Shield--Streamline-Lucide.svg',
-        orange: '/assets/Award--Streamline-Lucide.svg',
+        green: assetPath('assets/Leaf--Streamline-Lucide.svg'),
+        blue: assetPath('assets/Shield--Streamline-Lucide.svg'),
+        orange: assetPath('assets/Award--Streamline-Lucide.svg'),
     };
 
     return (

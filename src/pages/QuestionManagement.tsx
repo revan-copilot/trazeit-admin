@@ -155,14 +155,9 @@ const QuestionManagement: React.FC = () => {
                             width: '10%',
                             render: () => (
                                 <div className="flex items-center gap-1">
-                                    <button className="p-2 text-[#475467] hover:text-primary transition-colors" title="Edit">
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <button className="p-2 text-[#475467] hover:text-primary hover:bg-gray-100 rounded-lg transition-colors" title="Edit">
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                        </svg>
-                                    </button>
-                                    <button className="p-2 text-[#475467] hover:text-primary transition-colors" title="More">
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                                         </svg>
                                     </button>
                                 </div>

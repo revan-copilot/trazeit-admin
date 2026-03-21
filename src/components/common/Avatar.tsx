@@ -10,10 +10,12 @@ interface AvatarProps {
     lastName?: string;
     /** Fallback name if firstName/lastName aren't provided */
     name?: string;
-    size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
     className?: string;
     /** Additional classes for the initials text */
     textClassName?: string;
+    /** Custom rounding class, e.g., 'rounded-xl' or 'rounded-2xl' */
+    rounded?: string;
 }
 
 // ──────────────────────────────────────────────
@@ -25,7 +27,8 @@ const SIZE_MAP: Record<string, { container: string; text: string }> = {
     sm: { container: 'w-10 h-10', text: 'text-sm' },
     md: { container: 'w-12 h-12', text: 'text-base' },
     lg: { container: 'w-16 h-16', text: 'text-lg' },
-    xl: { container: 'w-40 h-40', text: 'text-5xl' },
+    xl: { container: 'w-40 h-40', text: 'text-4xl' },
+    full: { container: 'w-full h-full', text: 'text-5xl' },
 };
 
 // Deterministic color from name — same name always gets same color
@@ -62,6 +65,7 @@ const Avatar: React.FC<AvatarProps> = ({
     size = 'md',
     className = '',
     textClassName = '',
+    rounded = 'rounded-full',
 }) => {
     const [imgError, setImgError] = useState(false);
 
@@ -94,7 +98,7 @@ const Avatar: React.FC<AvatarProps> = ({
 
     return (
         <div
-            className={`${sizeConfig.container} rounded-full overflow-hidden flex items-center justify-center flex-shrink-0 ${hasValidSrc ? '' : bgColor
+            className={`${sizeConfig.container} ${rounded} overflow-hidden flex items-center justify-center flex-shrink-0 ${hasValidSrc ? '' : bgColor
                 } ${className}`}
             title={fullName}
         >
