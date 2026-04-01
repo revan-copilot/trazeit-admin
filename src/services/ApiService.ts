@@ -44,7 +44,7 @@ interface RequestConfig extends RequestInit {
 // Constants
 // ──────────────────────────────────────────────
 
-const DEFAULT_BASE_URL = 'http://13.200.246.65:3001';
+const DEFAULT_BASE_URL = 'https://d9e2-13-200-246-65.ngrok-free.app';
 const DEFAULT_TIMEOUT = 30_000; // 30 seconds
 const TOKEN_KEY = 'accessToken';
 const USER_KEY = 'user';
@@ -118,6 +118,7 @@ class ApiService {
         const headers = new Headers({
             'Content-Type': 'application/json',
             'Accept': 'application/json',
+            'ngrok-skip-browser-warning': 'true',
             ...(customHeaders as Record<string, string> || {}),
         });
 
