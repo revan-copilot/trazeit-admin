@@ -55,9 +55,9 @@ const Login: React.FC = () => {
                 {/* Logo */}
                 <div className="text-center mb-8">
                     <img
-                        src={assetPath('assets/trazeit-logo.svg')}
+                        src={assetPath('assets/trazeit-logo-blue.png')}
                         alt="Trazeit Logo"
-                        className="h-36 mx-auto mb-6"
+                        className="h-12 w-auto mx-auto mb-6"
                     />
                 </div>
 
