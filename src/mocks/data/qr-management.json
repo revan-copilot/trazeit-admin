@@ -1,304 +1,145 @@
 {
-    "qr_scans": [
+    "statusCode": 200,
+    "status": "success",
+    "message": "Batch Activity List",
+    "data": [
         {
-            "id": "1",
-            "productName": "Green Beans",
-            "qrCode": "QR006",
-            "batch": "BT-2024-006",
-            "scans": 220,
-            "grades": [
-                {
-                    "text": "Freshly Harvested",
-                    "type": "green"
-                },
-                {
-                    "text": "Local Sourcing",
-                    "type": "blue"
-                },
-                {
-                    "text": "Grade A Quality",
-                    "type": "orange"
-                }
-            ],
-            "location": {
-                "company": "Farm to Table Co.",
-                "address": "Washington, USA"
-            }
+            "_id": "69049e4565ccab541d42eabf",
+            "batch": {
+                "_id": "68f3bfdfd7f5d77978358708",
+                "batchNo": "2025/OCT/18/6"
+            },
+            "product": [],
+            "status": "active",
+            "title": "hgfg",
+            "description": "hgfhhg",
+            "createdBy": {
+                "_id": "68cd3c33a34a5a9f32b05258",
+                "firstName": "Elangovan",
+                "lastName": "Manoharan",
+                "profilePic": " https://trazeit-images.s3.ap-southeast-2.amazonaws.com/profilepic.jpeg",
+                "phone": "9159041421"
+            },
+            "createdAt": "2025-10-31T11:32:21.598Z",
+            "updatedAt": "2025-10-31T11:32:21.598Z"
         },
         {
-            "id": "2",
-            "productName": "Butternut Squash",
-            "qrCode": "QR005",
-            "batch": "BT-2024-005",
-            "scans": 180,
-            "grades": [
-                {
-                    "text": "Organic Certified",
-                    "type": "green"
-                },
-                {
-                    "text": "Traceable Supply Chain",
-                    "type": "blue"
-                },
-                {
-                    "text": "Grade A Quality",
-                    "type": "orange"
-                }
-            ],
-            "location": {
-                "company": "Harvest Time Farms",
-                "address": "Oregon, USA"
-            }
+            "_id": "6904b4d265ccab541d42eaf4",
+            "batch": {
+                "_id": "68fba72a65ccab541d42ca1f",
+                "batchNo": "2025/OCT/24/9"
+            },
+            "product": [],
+            "status": "active",
+            "title": "fdsfsdf",
+            "description": "fdsfsdf",
+            "createdBy": {
+                "_id": "68cd3c33a34a5a9f32b05258",
+                "firstName": "Elangovan",
+                "lastName": "Manoharan",
+                "profilePic": " https://trazeit-images.s3.ap-southeast-2.amazonaws.com/profilepic.jpeg",
+                "phone": "9159041421"
+            },
+            "createdAt": "2025-10-31T13:08:34.178Z",
+            "updatedAt": "2025-10-31T13:08:34.178Z"
         },
         {
-            "id": "3",
-            "productName": "Heirloom Carrots",
-            "qrCode": "QR002",
-            "batch": "BT-2024-002",
-            "scans": 150,
-            "grades": [
-                {
-                    "text": "Non-GMO",
-                    "type": "green"
-                },
-                {
-                    "text": "Farm Fresh",
-                    "type": "blue"
-                },
-                {
-                    "text": "Grade A Quality",
-                    "type": "orange"
-                }
-            ],
-            "location": {
-                "company": "Root Veggie Farms",
-                "address": "California, USA"
-            }
+            "_id": "6904b79e65ccab541d42eafd",
+            "batch": {
+                "_id": "68d547c3f6a0a0ec3ac7b29a",
+                "batchNo": "2025/SEP/25/5"
+            },
+            "product": [],
+            "status": "active",
+            "title": "wrwer",
+            "description": "fdsf",
+            "createdBy": {
+                "_id": "68cd3c33a34a5a9f32b05258",
+                "firstName": "Elangovan",
+                "lastName": "Manoharan",
+                "profilePic": " https://trazeit-images.s3.ap-southeast-2.amazonaws.com/profilepic.jpeg",
+                "phone": "9159041421"
+            },
+            "createdAt": "2025-10-31T13:20:30.218Z",
+            "updatedAt": "2025-10-31T13:20:30.218Z"
         },
         {
-            "id": "4",
-            "productName": "Radishes",
-            "qrCode": "QR007",
-            "batch": "BT-2024-007",
-            "scans": 100,
-            "grades": [
+            "_id": "6904b7f265ccab541d42eb0a",
+            "batch": {
+                "_id": "68fba72a65ccab541d42ca1f",
+                "batchNo": "2025/OCT/24/9"
+            },
+            "product": [
                 {
-                    "text": "Organic Grown",
-                    "type": "green"
-                },
-                {
-                    "text": "Environmentally Friendly",
-                    "type": "blue"
-                },
-                {
-                    "text": "Grade A Quality",
-                    "type": "orange"
+                    "_id": "68d52b53a9826d8f12333ba9",
+                    "name": "Tea Processing",
+                    "description": "Tea Power processing",
+                    "images": [
+                        "https://trazeit-images.s3.ap-southeast-2.amazonaws.com/pr2.jpg"
+                    ]
                 }
             ],
-            "location": {
-                "company": "Rooted Farms",
-                "address": "Illinois, USA"
-            }
+            "status": "active",
+            "title": "gfdgdf",
+            "description": "hghfgf",
+            "createdBy": {
+                "_id": "68cd3c33a34a5a9f32b05258",
+                "firstName": "Elangovan",
+                "lastName": "Manoharan",
+                "profilePic": " https://trazeit-images.s3.ap-southeast-2.amazonaws.com/profilepic.jpeg",
+                "phone": "9159041421"
+            },
+            "createdAt": "2025-10-31T13:21:54.218Z",
+            "updatedAt": "2025-10-31T13:21:54.218Z"
         },
         {
-            "id": "5",
-            "productName": "Sweet Bell Peppers",
-            "qrCode": "QR003",
-            "batch": "BT-2024-003",
-            "scans": 300,
-            "grades": [
+            "_id": "6904b89165ccab541d42eb17",
+            "batch": {
+                "_id": "68fba72a65ccab541d42ca1f",
+                "batchNo": "2025/OCT/24/9"
+            },
+            "product": [
                 {
-                    "text": "Pesticide-Free",
-                    "type": "green"
-                },
-                {
-                    "text": "Eco-Friendly Practices",
-                    "type": "blue"
-                },
-                {
-                    "text": "Grade A Quality",
-                    "type": "orange"
+                    "_id": "68d52b53a9826d8f12333ba9",
+                    "name": "Tea Processing",
+                    "description": "Tea Power processing",
+                    "images": [
+                        "https://trazeit-images.s3.ap-southeast-2.amazonaws.com/pr2.jpg"
+                    ]
                 }
             ],
-            "location": {
-                "company": "Sunny Fields Produce",
-                "address": "Florida, USA"
-            }
+            "status": "active",
+            "title": "dsdsd",
+            "description": "dsdsd",
+            "createdBy": {
+                "_id": "68cd3c33a34a5a9f32b05258",
+                "firstName": "Elangovan",
+                "lastName": "Manoharan",
+                "profilePic": " https://trazeit-images.s3.ap-southeast-2.amazonaws.com/profilepic.jpeg",
+                "phone": "9159041421"
+            },
+            "createdAt": "2025-10-31T13:24:33.658Z",
+            "updatedAt": "2025-10-31T13:24:33.658Z"
         },
         {
-            "id": "6",
-            "productName": "Zucchini",
-            "qrCode": "QR008",
-            "batch": "BT-2024-008",
-            "scans": 350,
-            "grades": [
-                {
-                    "text": "Certified Organic",
-                    "type": "green"
-                },
-                {
-                    "text": "Locally Sourcing",
-                    "type": "blue"
-                },
-                {
-                    "text": "Grade A Quality",
-                    "type": "orange"
-                }
-            ],
-            "location": {
-                "company": "Bountiful Harvesters",
-                "address": "New York, USA"
-            }
-        },
-        {
-            "id": "7",
-            "productName": "Organic Tomatoes",
-            "qrCode": "QR001",
-            "batch": "BT-2024-001",
-            "scans": 264,
-            "grades": [
-                {
-                    "text": "USDA Organic Certified",
-                    "type": "green"
-                },
-                {
-                    "text": "Blockchain Verified",
-                    "type": "blue"
-                },
-                {
-                    "text": "Grade A Quality",
-                    "type": "orange"
-                }
-            ],
-            "location": {
-                "company": "Leafy Greens Co.",
-                "address": "Arizona, USA"
-            }
-        },
-        {
-            "id": "8",
-            "productName": "Spinach",
-            "qrCode": "QR009",
-            "batch": "BT-2024-009",
-            "scans": 400,
-            "grades": [
-                {
-                    "text": "USDA Certified Organic",
-                    "type": "green"
-                },
-                {
-                    "text": "Chemical-Free Farming",
-                    "type": "blue"
-                },
-                {
-                    "text": "Grade A Quality",
-                    "type": "orange"
-                }
-            ],
-            "location": {
-                "company": "Vital Greens Co.",
-                "address": "Colorado, USA"
-            }
-        },
-        {
-            "id": "9",
-            "productName": "Crisp Cucumbers",
-            "qrCode": "QR004",
-            "batch": "BT-2024-004",
-            "scans": 200,
-            "grades": [
-                {
-                    "text": "Naturally Grown",
-                    "type": "green"
-                },
-                {
-                    "text": "Sustainably Sourced",
-                    "type": "blue"
-                },
-                {
-                    "text": "Grade A Quality",
-                    "type": "orange"
-                }
-            ],
-            "location": {
-                "company": "Green Thumb Growers",
-                "address": "Texas, USA"
-            }
-        },
-        {
-            "id": "10",
-            "productName": "Kale",
-            "qrCode": "QR010",
-            "batch": "BT-2024-010",
-            "scans": 350,
-            "grades": [
-                {
-                    "text": "Organic Certified",
-                    "type": "green"
-                },
-                {
-                    "text": "Cultivated with Care",
-                    "type": "blue"
-                },
-                {
-                    "text": "Grade A Quality",
-                    "type": "orange"
-                }
-            ],
-            "location": {
-                "company": "Green Leaf Farms",
-                "address": "Wisconsin, USA"
-            }
-        },
-        {
-            "id": "11",
-            "productName": "Eggplant",
-            "qrCode": "QR011",
-            "batch": "BT-2024-011",
-            "scans": 250,
-            "grades": [
-                {
-                    "text": "Non-GMO",
-                    "type": "green"
-                },
-                {
-                    "text": "Sustainably Grown",
-                    "type": "blue"
-                },
-                {
-                    "text": "Grade A Quality",
-                    "type": "orange"
-                }
-            ],
-            "location": {
-                "company": "Mediterranean Harvest Co.",
-                "address": "New Jersey, USA"
-            }
-        },
-        {
-            "id": "12",
-            "productName": "Pumpkins",
-            "qrCode": "QR012",
-            "batch": "BT-2024-012",
-            "scans": 220,
-            "grades": [
-                {
-                    "text": "Organic Practices",
-                    "type": "green"
-                },
-                {
-                    "text": "Farm to Fork",
-                    "type": "blue"
-                },
-                {
-                    "text": "Grade A Quality",
-                    "type": "orange"
-                }
-            ],
-            "location": {
-                "company": "Crisp Autumn Farms",
-                "address": "Michigan, USA"
-            }
+            "_id": "69b66d930dbc585e8d988eef",
+            "product": [],
+            "data": {
+                "secret": "123456"
+            },
+            "status": "active",
+            "title": "Tea powder",
+            "description": "Tea powder",
+            "createdBy": {
+                "_id": "68cd3c33a34a5a9f32b05258",
+                "firstName": "Elangovan",
+                "lastName": "Manoharan",
+                "profilePic": " https://trazeit-images.s3.ap-southeast-2.amazonaws.com/profilepic.jpeg",
+                "phone": "9159041421"
+            },
+            "createdAt": "2026-03-15T08:28:03.667Z",
+            "updatedAt": "2026-03-15T08:28:03.667Z"
         }
-    ]
+    ],
+    "totalCount": 6
 }

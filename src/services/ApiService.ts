@@ -44,7 +44,7 @@ interface RequestConfig extends RequestInit {
 // Constants
 // ──────────────────────────────────────────────
 
-const DEFAULT_BASE_URL = 'https://d9e2-13-200-246-65.ngrok-free.app';
+const DEFAULT_BASE_URL = 'https://api.trazeit.tech';
 const DEFAULT_TIMEOUT = 30_000; // 30 seconds
 const TOKEN_KEY = 'accessToken';
 const USER_KEY = 'user';
