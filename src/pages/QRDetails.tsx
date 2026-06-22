@@ -8,7 +8,11 @@ import innerBannerFallback from '../assets/inner-banner.png';
 
 type TabType = 'farming' | 'processing' | 'distribution' | 'retailer';
 
-const QRDetails: React.FC = () => {
+interface QRDetailsProps {
+    isAdmin?: boolean;
+}
+
+const QRDetails: React.FC<QRDetailsProps> = ({ isAdmin = false }) => {
     const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
     const [data, setData] = useState<IBatchDetail | null>(null);
@@ -205,26 +209,40 @@ const QRDetails: React.FC = () => {
     };
 
     if (loading) {
-        return (
+        const spinner = (
             <div className="flex h-[calc(100vh-100px)] items-center justify-center">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            </div>
+        );
+        if (isAdmin) return spinner;
+        return (
+            <div className="min-h-screen bg-gradient-body p-6 flex items-center justify-center">
+                {spinner}
             </div>
         );
     }
 
     if (error || !data) {
-        return (
+        const errorCard = (
             <div className="p-6 text-center max-w-lg mx-auto">
                 <div className="bg-red-50 text-red-600 p-6 rounded-2xl border border-red-100 shadow-sm">
                     <p className="font-semibold text-lg mb-2">Error Loading Batch Details</p>
                     <p className="text-sm text-red-500 mb-6">{error || 'Batch not found.'}</p>
-                    <button
-                        onClick={() => navigate('/qr-management')}
-                        className="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors"
-                    >
-                        Back to List
-                    </button>
+                    {isAdmin && (
+                        <button
+                            onClick={() => navigate('/qr-management')}
+                            className="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors"
+                        >
+                            Back to List
+                        </button>
+                    )}
                 </div>
+            </div>
+        );
+        if (isAdmin) return errorCard;
+        return (
+            <div className="min-h-screen bg-gradient-body p-6">
+                {errorCard}
             </div>
         );
     }
@@ -243,25 +261,26 @@ const QRDetails: React.FC = () => {
     const bannerPrimary = resolveImageUrl(data?.property?.images?.[0]);
     const productAvatar = resolveImageUrl(data?.product?.images?.[0]);
 
-    return (
-        <div className="space-y-6 pb-20">
-            {/* Back link Navigation & Breadcrumbs */}
-            <div>
-                <Link 
-                    to="/qr-management" 
-                    className="inline-flex items-center gap-2 text-sm font-bold text-gray-400 hover:text-primary transition-colors mb-4 group"
-                >
-                    <svg className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                    </svg>
-                    Back to QR Management
-                </Link>
-                <div className="flex items-center gap-2 text-sm text-gray-500 font-medium">
-                    <Link to="/qr-management" className="hover:text-primary transition-colors font-bold">QR Management</Link>
-                    <span className="text-gray-300 font-bold">/</span>
-                    <span className="text-gray-900 font-bold">Batch Details</span>
+    const pageContent = (
+        <div className={`space-y-6 pb-20 ${!isAdmin ? 'max-w-4xl mx-auto' : ''}`}>
+            {isAdmin ? (
+                <div>
+                    <Link 
+                        to="/qr-management" 
+                        className="inline-flex items-center gap-2 text-sm font-bold text-gray-400 hover:text-primary transition-colors mb-4 group"
+                    >
+                        <svg className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        Back to QR Management
+                    </Link>
+                    <div className="flex items-center gap-2 text-sm text-gray-500 font-medium">
+                        <Link to="/qr-management" className="hover:text-primary transition-colors font-bold">QR Management</Link>
+                        <span className="text-gray-300 font-bold">/</span>
+                        <span className="text-gray-900 font-bold">Batch Details</span>
+                    </div>
                 </div>
-            </div>
+            ) : null}
 
             {/* Profile Header Block with overlapping Product Circle */}
             <div className="bg-white/60 backdrop-blur-[62.8px] border-2 border-white rounded-xl shadow-sm overflow-hidden">
@@ -651,6 +670,16 @@ const QRDetails: React.FC = () => {
                     </div>
                 </div>
             </div>
+        </div>
+    );
+
+    if (isAdmin) {
+        return pageContent;
+    }
+
+    return (
+        <div className="min-h-screen bg-gradient-body p-6">
+            {pageContent}
         </div>
     );
 };

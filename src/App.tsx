@@ -21,6 +21,7 @@ function App() {
             <Routes>
                 {/* Public Routes */}
                 <Route path="/login" element={<Login />} />
+                <Route path="/qr/:id" element={<QRDetails isAdmin={false} />} />
 
                 {/* Protected Routes */}
                 <Route element={<DashboardLayout />}>
@@ -34,7 +35,7 @@ function App() {
                     <Route path="/products" element={<ProductManagement />} />
                     <Route path="/products/:id" element={<ProductDetail />} />
                     <Route path="/qr-management" element={<QRManagement />} />
-                    <Route path="/qr-management/:id" element={<QRDetails />} />
+                    <Route path="/qr-management/:id" element={<QRDetails isAdmin={true} />} />
                     <Route path="/documents" element={<QuestionManagement />} />
                     <Route path="/maximize" element={<ComingSoon title="Maximize" />} />
                     <Route path="/help" element={<ComingSoon title="Help" />} />

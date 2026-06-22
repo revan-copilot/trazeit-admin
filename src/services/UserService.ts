@@ -123,8 +123,11 @@ function buildQueryString(params: IUserQueryParams): string {
 
 class UserService {
     private static instance: UserService;
+    private useMock: boolean;
 
-    private constructor() { }
+    private constructor() {
+        this.useMock = import.meta.env.VITE_USE_MOCK === 'true';
+    }
 
     public static getInstance(): UserService {
         if (!UserService.instance) {
@@ -202,6 +205,33 @@ class UserService {
      * Get user by ID
      */
     async getUserById(id: string): Promise<IUser> {
+        if (this.useMock) {
+            await new Promise(resolve => setTimeout(resolve, 300));
+            return {
+                _id: id,
+                firstName: "Elangovan",
+                lastName: "Manoharan",
+                email: "elangovan@trazeit.tech",
+                profilePic: "https://trazeit-images.s3.ap-southeast-2.amazonaws.com/profilepic.jpeg",
+                countryCode: 91,
+                phone: "9159041421",
+                phoneVerified: true,
+                userType: ["super_admin"],
+                status: "active",
+                address1: "123 Main St",
+                address2: "",
+                city: "Coimbatore",
+                state: "Tamil Nadu",
+                country: "India",
+                postalCode: "641001",
+                gender: "male",
+                dob: "1990-01-01",
+                isDeleted: false,
+                company: "68d53123f6a0a0ec3ac7b277",
+                createdAt: "2025-10-24T08:00:00.000Z",
+                updatedAt: "2025-10-31T13:24:33.658Z"
+            };
+        }
         return apiService.get<IUser>(`/user/${id}`);
     }
 

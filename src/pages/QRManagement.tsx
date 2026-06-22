@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import qrService, { IQRCode } from '../services/QRService';
 import DataTable from '../components/common/DataTable';
 import TablePagination from '../components/common/TablePagination';
+import GenerateQRModal from '../components/qr/GenerateQRModal';
+import ShowQRModal from '../components/qr/ShowQRModal';
 import { assetPath } from '../utils/assetPath';
 
 const QRManagement: React.FC = () => {
@@ -14,6 +16,9 @@ const QRManagement: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(null);
     const [totalCount, setTotalCount] = useState(0);
+    const [isGenerateQROpen, setIsGenerateQROpen] = useState(false);
+    const [isShowQROpen, setIsShowQROpen] = useState(false);
+    const [selectedQRItem, setSelectedQRItem] = useState<IQRCode | null>(null);
 
     useEffect(() => {
         loadData();
@@ -130,6 +135,13 @@ const QRManagement: React.FC = () => {
                         <path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 </button>
+
+                <button
+                    onClick={() => setIsGenerateQROpen(true)}
+                    className="flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-white rounded-lg hover:bg-primary-600 transition-colors font-medium text-sm shadow-sm min-w-[124px] whitespace-nowrap"
+                >
+                    Generate QR
+                </button>
             </div>
 
             <DataTable
@@ -236,16 +248,33 @@ const QRManagement: React.FC = () => {
                         header: 'ACTION',
                         key: '_id',
                         render: (item: IQRCode) => (
-                            <button
-                                onClick={() => navigate(`/qr-management/${item.batch?._id || item._id}`)}
-                                className="p-2 text-[#475467] hover:text-primary transition-colors rounded-lg hover:bg-gray-50 focus:outline-none"
-                                title="View Details"
-                            >
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                </svg>
-                            </button>
+                            <div className="flex items-center gap-1.5">
+                                <button
+                                    onClick={() => {
+                                        setSelectedQRItem(item);
+                                        setIsShowQROpen(true);
+                                    }}
+                                    className="p-2 text-[#475467] hover:text-primary transition-colors rounded-lg hover:bg-gray-50 focus:outline-none"
+                                    title="Show QR Code"
+                                >
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <rect x="3" y="3" width="7" height="7" rx="1" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} />
+                                        <rect x="14" y="3" width="7" height="7" rx="1" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} />
+                                        <rect x="3" y="14" width="7" height="7" rx="1" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} />
+                                        <path d="M14 14h2m3 0h2m-5 3v2m3-2v2m-3-4v2m3-2h2m0 5h-2" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} />
+                                    </svg>
+                                </button>
+                                <button
+                                    onClick={() => navigate(`/qr-management/${item.batch?._id || item._id}`)}
+                                    className="p-2 text-[#475467] hover:text-primary transition-colors rounded-lg hover:bg-gray-50 focus:outline-none"
+                                    title="View Details"
+                                >
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg>
+                                </button>
+                            </div>
                         )
                     }
                 ]}
@@ -268,6 +297,23 @@ const QRManagement: React.FC = () => {
                         />
                     )
                 }
+            />
+
+            <GenerateQRModal
+                isOpen={isGenerateQROpen}
+                onClose={() => {
+                    setIsGenerateQROpen(false);
+                    loadData();
+                }}
+            />
+
+            <ShowQRModal
+                isOpen={isShowQROpen}
+                onClose={() => {
+                    setIsShowQROpen(false);
+                    setSelectedQRItem(null);
+                }}
+                qrItem={selectedQRItem}
             />
         </div>
     );

@@ -13,6 +13,8 @@ import mockData from '../mocks/data/qr-management.json';
 export interface IBatch {
     _id: string;
     batchNo: string;
+    product?: IProduct;
+    company?: ICompany;
 }
 
 export interface IProduct {
@@ -202,7 +204,173 @@ class QRService {
     }
 
     async getBatchById(id: string): Promise<IBatchDetail | undefined> {
+        if (this.useMock) {
+            await new Promise(resolve => setTimeout(resolve, 300));
+            return {
+                _id: id,
+                batchNo: "2025/OCT/24/9",
+                user: {
+                    _id: "68cd3c33a34a5a9f32b05258",
+                    firstName: "Elangovan",
+                    lastName: "Manoharan",
+                    profilePic: "https://trazeit-images.s3.ap-southeast-2.amazonaws.com/profilepic.jpeg",
+                    phone: "9159041421"
+                },
+                property: {
+                    _id: "68d54123f6a0a0ec3ac7b258",
+                    name: "Valparai Organic Farm",
+                    address1: "789 Plantation Avenue",
+                    city: "Valparai",
+                    state: "Tamil Nadu",
+                    country: "India",
+                    postalCode: "642127",
+                    images: ["https://images.unsplash.com/photo-1597113366853-91f9170023f2?w=800"],
+                    data: {
+                        Size: "25 Acres"
+                    }
+                },
+                product: {
+                    _id: "68d52b53a9826d8f12333ba9",
+                    name: "Tea Processing",
+                    description: "Tea Power processing",
+                    images: ["https://trazeit-images.s3.ap-southeast-2.amazonaws.com/pr2.jpg"]
+                },
+                company: {
+                    _id: "68d53123f6a0a0ec3ac7b277",
+                    name: "Trazeit Tea Estates",
+                    address1: "456 Corporate Bypass Rd",
+                    city: "Coimbatore",
+                    state: "Tamil Nadu",
+                    country: "India",
+                    postalCode: "641001",
+                    data: {
+                        ownerName: "Rajesh Kumar"
+                    }
+                },
+                status: "active",
+                start: "2025-10-24T08:00:00.000Z",
+                end: "2025-10-31T17:00:00.000Z",
+                createdBy: {
+                    _id: "68cd3c33a34a5a9f32b05258",
+                    firstName: "Elangovan",
+                    lastName: "Manoharan",
+                    profilePic: "https://trazeit-images.s3.ap-southeast-2.amazonaws.com/profilepic.jpeg",
+                    phone: "9159041421"
+                },
+                createdAt: "2025-10-24T08:00:00.000Z",
+                updatedAt: "2025-10-31T13:24:33.658Z",
+                steps: [
+                    {
+                        _id: "step1",
+                        company: {
+                            _id: "68d53123f6a0a0ec3ac7b277",
+                            name: "Trazeit Tea Estates",
+                            address1: "456 Corporate Bypass Rd",
+                            city: "Coimbatore",
+                            state: "Tamil Nadu",
+                            country: "India",
+                            postalCode: "641001"
+                        },
+                        step: {
+                            _id: "s1",
+                            title: "Tea Harvesting",
+                            description: "Fresh green tea leaves are harvested early in the morning."
+                        },
+                        product: {
+                            _id: "68d52b53a9826d8f12333ba9",
+                            name: "Tea Processing",
+                            description: "Tea Power processing",
+                            images: []
+                        },
+                        createdAt: "2025-10-24T10:00:00.000Z",
+                        updatedAt: "2025-10-24T10:00:00.000Z",
+                        activity: {
+                            _id: "act1",
+                            title: "Harvest Session",
+                            description: "Harvested batch 6 tea leaves.",
+                            status: "completed",
+                            images: ["https://images.unsplash.com/photo-1597113366853-91f9170023f2?w=800"],
+                            datetime: "2025-10-24T10:00:00.000Z",
+                            createdBy: {
+                                _id: "68cd3c33a34a5a9f32b05258",
+                                firstName: "Elangovan",
+                                lastName: "Manoharan",
+                                profilePic: "https://trazeit-images.s3.ap-southeast-2.amazonaws.com/profilepic.jpeg",
+                                phone: "9159041421"
+                            },
+                            inputs: [
+                                { label: "Plucking Quality", type: "textbox", value: "Excellent" },
+                                { label: "Leaf Temperature (°C)", type: "textbox", value: "22" },
+                                { label: "Harvest Date", type: "date", value: "2025-10-24" }
+                            ]
+                        }
+                    },
+                    {
+                        _id: "step2",
+                        company: {
+                            _id: "68d53123f6a0a0ec3ac7b277",
+                            name: "Trazeit Tea Estates",
+                            address1: "456 Corporate Bypass Rd",
+                            city: "Coimbatore",
+                            state: "Tamil Nadu",
+                            country: "India",
+                            postalCode: "641001"
+                        },
+                        step: {
+                            _id: "s2",
+                            title: "Leaf Cleaning & Sorting",
+                            description: "Leaves are sorted and cleaned to remove impurities."
+                        },
+                        product: {
+                            _id: "68d52b53a9826d8f12333ba9",
+                            name: "Tea Processing",
+                            description: "Tea Power processing",
+                            images: []
+                        },
+                        createdAt: "2025-10-25T11:00:00.000Z",
+                        updatedAt: "2025-10-25T11:00:00.000Z",
+                        activity: {
+                            _id: "act2",
+                            title: "Sorting Session",
+                            description: "Sorted leaves to filter out damaged pieces.",
+                            status: "completed",
+                            images: [],
+                            datetime: "2025-10-25T11:00:00.000Z",
+                            createdBy: {
+                                _id: "68cd3c33a34a5a9f32b05258",
+                                firstName: "Elangovan",
+                                lastName: "Manoharan",
+                                profilePic: "https://trazeit-images.s3.ap-southeast-2.amazonaws.com/profilepic.jpeg",
+                                phone: "9159041421"
+                            },
+                            inputs: [
+                                { label: "Rejected Percentage", type: "textbox", value: "2.5%" },
+                                { label: "Sorting Method", type: "textbox", value: "Manual and Optical Sorting" }
+                            ]
+                        }
+                    }
+                ]
+            };
+        }
         return apiService.get<IBatchDetail>(`/batch/${id}`);
+    }
+
+    async getBatches(): Promise<IBatch[]> {
+        const response = await apiService.get<any>('/batch');
+        return Array.isArray(response) ? response : (response?.data || []);
+    }
+
+    async createQR(data: {
+        batch: string;
+        product: string;
+        company: string;
+        label: string;
+        title: string;
+        description: string;
+        quantity: number;
+        data: { secret: string };
+    }): Promise<IQRCode> {
+        return apiService.post<IQRCode>('/product-qr', data);
     }
 }
 
